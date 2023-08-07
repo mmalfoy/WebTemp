@@ -6,6 +6,8 @@ import MyTravelSpecifics from '../MyTravelSpecifics/MyTravelSpecifics';
 import BtnMyTravelMenu from '../BtnMyTravelMenu/BtnMyTravelMenu';
 import MyTravelLists from '../MyTravelLists/MyTravelLists';
 import profileTest from './profileTest.png'
+import Nav from '../Nav/Nav';
+
 
 function MyTravelMain() {
   const [view, setView] = useState('list'); 
@@ -17,6 +19,7 @@ function MyTravelMain() {
   };
   return (
     <div>
+      {/* <Nav/> */}
       {view === 'list' && (
         <div style={{ display: 'flex', flexDirection: 'row',justifyContent:'center', height: '62.6vh' }}>
           <div className='my-travel-profile'>
@@ -30,7 +33,7 @@ function MyTravelMain() {
 
       {view === 'specifics' && (
         <div>
-          <div style={{ flexGrow: 1, marginRight: '7vw' }}>
+          <div style={{ flexGrow: 1}}>
             <MyTravelSpecifics travel={selectedTravel} />
           </div>
         </div>
