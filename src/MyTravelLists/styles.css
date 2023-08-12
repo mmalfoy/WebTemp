@@ -47,5 +47,6 @@
 
 .my-travel-lists {
     overflow-y: auto;
-    max-height: 100vh;
+    height: 73vh;
+    
 }
