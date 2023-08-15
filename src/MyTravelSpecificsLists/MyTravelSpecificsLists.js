@@ -4,110 +4,84 @@ import './styles.css';
 import circles from './circles.svg'; 
 import MyTravelCreate from '../MyTravelCreate/MyTravelCreate';
 
-const travels = [
-    // { name: '하나 여행', category: '개인맞춤', duration: "3박4일", start: '7/1', end: '7/4' },
-    // { name: '둘 여행', category: '개인맞춤', duration: "3박4일", start: '7/1', end: '7/4' },
-    // { name: '셋 여행', category: '개인맞춤', duration: "3박4일", start: '7/1', end: '7/4' },
-    // { name: '넷 여행', category: '개인맞춤', duration: "3박4일", start: '7/1', end: '7/4' },
-    // { name: '다섯 여행', category: '개인맞춤', duration: "3박4일", start: '7/1', end: '7/4' },
-    // { name: '여섯 여행', category: '개인맞춤', duration: "3박4일", start: '7/1', end: '7/4' },
-    // { name: '일곱 여행', category: '개인맞춤', duration: "3박4일", start: '7/1', end: '7/4' },
-    // { name: '여덟 여행', category: '개인맞춤', duration: "3박4일", start: '7/1', end: '7/4' },
-    // { name: '아홉 여행', category: '개인맞춤', duration: "3박4일", start: '7/1', end: '7/4' },
-    // { name: '열 여행', category: '개인맞춤', duration: "3박4일", start: '7/1', end: '7/4' },
-  ];
-  
-  /*api 통신 후 받아온 상세 일정정보 */
-//   const response = {
-//     "result": {
-//         "dcId": 1,
-//         "spot1": null,
-//         "spot2": null,
-//         "spot3": null,
-//         "spot4": null,
-//         "first": null,
-//         "second": null,
-//         "third": null,
-//         "numOfDay": 1,
-//         "tid": 1
-//     }
-// };
 
-// const resultArray = Object.keys(response.result).map(key => {
-//     return {
-//         key: key,
-//         value: response.result[key]
-//     };
-// });
-//console.log(resultArray);
 
-  function TravelCard({ name, category, duration, start, end, setSelectedTravel, setView ,indexNull}) {
+  function TravelCard({  spot1, spot2, spot3, spot4, first, second, third, start, end, setView,...props }) {
   
-    const handleDetailClick = () => {
-      console.log('Detail button clicked');
-      setSelectedTravel({ name, category, duration, start, end });
-      setView('specifics');
+  
+    const convertDistance = (distance) => {
+      if (distance >= 1000) {
+        return `${distance / 1000}km`;
+      }
+      return `${distance}m`;
     };
-  
-    const handleReviewClick = () => {
-      console.log('Review button clicked');
-      // 리뷰쓰기
-    };
-  
-    const handleShareClick = () => {
-      console.log('Share button clicked');
-      // 공유 버튼을 클릭
-    };
-  
     
+    console.log("start데이는:",start);
+
+    function convertToDate(inputString) {
+      if (!inputString) return null;
+      const year = `20${inputString.substring(0, 2)}`;
+      const month = inputString.substring(2, 4);
+      const day = inputString.substring(4, 6);
+    
+      return new Date(`${year}-${month}-${day}`);
+    }
+    
+    function formatDate(inputDate) {
+      if (!inputDate) return null;
+      const weekdays = ["일", "월", "화", "수", "목", "금", "토"];
+      const month = inputDate.getMonth() + 1;
+      const day = inputDate.getDate();
+      const weekday = weekdays[inputDate.getDay()];
+    
+      return `${month}/${day}(${weekday})`;
+    }
+
+    function addDays(date, days) {
+      let result = new Date(date);
+      result.setDate(result.getDate() + days);
+      return result;
+  }
+
+    const SpotDisplay = ({ num, spot, distance }) => (
+      <div className='spot-wrapper'>
+        <div className='spot-container'>
+          <div className="num-box">{`${num}`}</div>
+          <div className="travel-card-category">{spot}</div>
+        </div>
+        {distance && 
+          <div className="distance-container">
+            <div className="travel-card-line">|</div>
+            <div className="travel-card-distance">{convertDistance(distance)}</div>
+          </div>
+        }
+    </div>
+    );
   
     return (
-        <div className='container'>
-          <div>
-            <div className="date">안녕</div>
-              {indexNull==true?(
-                  <div className='travel-card'>
-                      <div className='my-travel-emptylists'>
-                          항목을 추가하세요
-                      </div>
-                  </div>
-
-              ):(
-                  <div className="travel-card">
-                  <div style={{  display: 'flex', flexDirection: 'row', marginTop: '10px', marginBottom: '10px', marginLeft: '40px', alignItems: 'flex-end'}}>
-                      <div className="travel-card-name">{name}</div>
-                      <div className="travel-card-category">{category}</div>
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'row', marginTop: '10px', marginBottom: '10px', marginLeft: '40px'}}>
-                      <div className="travel-card-duration">{duration}</div>
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'row', marginTop: '10px', marginBottom: '10px', marginLeft: '40px' }}>
-                      <div className="travel-card-text">{start}</div>
-                      <div className="travel-card-text">~</div>
-                      <div className="travel-card-text">{end}</div>
-                  </div>
-                  <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between',marginTop: '10px', marginBottom: '10px', marginLeft: '40px', marginRight:'40px'}}>
-                      <div className="travel-card-button" onClick={handleDetailClick}>상세보기</div>
-                      <div className="travel-card-button" onClick={handleReviewClick}>리뷰쓰기</div>
-                      <div className="travel-card-button" onClick={handleShareClick}>공유</div>
-                  </div>
-              </div>
-              )}
-          </div>
-
+      <div className='container'>
+        <div className="travel-card-header">
+          <span>{props.numOfDay}일차</span>
+          <div className='date'>{formatDate(convertToDate(start))}</div>
         </div>
-      
+          
+        <SpotDisplay num="1" spot={spot1} />
+        {spot2 && <SpotDisplay num="2" spot={spot2} distance={first} />}
+        {spot3 && <SpotDisplay num="3" spot={spot3} distance={second} />}
+        {spot4 && <SpotDisplay num="4" spot={spot4} distance={third} />}
+      </div>
     );
   }
   
-  function MyTravelSpecificsLists(props) {
+  function MyTravelSpecificsLists({ travels, ...props }) {
     const handleEditClick = () => {
       console.log('Edit button clicked');
-      if (travels.length == 0){
+      if (travels.courses.length == 0){
         props.setShowCreateComponent(true);  // 상태를 true로 설정하기
       }
     };
 
+    console.log("travel.start_date데이는:", travels.start_date);
     return (
         <div>
               <div className="image-container">
@@ -124,9 +98,11 @@ const travels = [
                         </div>
                     </div>
                 ) : (
-                  travels.map((travel, index) =>
-                    <TravelCard key={index} {...travel} />
-                  )
+                  travels.courses
+                    .sort((a, b) => a.numOfDay - b.numOfDay)  // 오름차순으로 정렬
+                    .map((travel, index) => 
+                        <TravelCard key={index} {...travel} start={travels.start_date} end={travel.end_date} />
+                    )
                 )}
                 <button className="edit-button" onClick={handleEditClick}></button>
               </div>
