@@ -15,11 +15,10 @@ const travels = [
   { name: '열 여행', category: '개인맞춤', duration: "3박4일", start: '7/1', end: '7/4' },
 ];
 
-function TravelCard({ name, category, duration, start, end, setSelectedTravel, setView, isEditMode, setIsEditMode, onDelete }) {
+function TravelCard({ name, category, duration, start, end, setView, isEditMode, setIsEditMode, onDelete }) {
 
   const handleDetailClick = () => {
     console.log('Detail button clicked');
-    setSelectedTravel({ name, category, duration, start, end });
     setView('specifics');
   };
 
@@ -35,7 +34,6 @@ function TravelCard({ name, category, duration, start, end, setSelectedTravel, s
 
   const handleEditClick = () => {
     console.log('Edit button clicked');
-    setSelectedTravel({ name, category, duration, start, end });
     setIsEditMode(false)
     setView('edit');
   };
@@ -70,7 +68,7 @@ function TravelCard({ name, category, duration, start, end, setSelectedTravel, s
               <div className="travel-card-button" onClick={handleDetailClick}>상세보기</div>
               <div className="travel-card-button" onClick={handleReviewClick}>리뷰쓰기</div>
               <div className="travel-card-button" onClick={handleShareClick}>공유</div>
-        </div>
+            </div>
         )}
         </div>
     </div>

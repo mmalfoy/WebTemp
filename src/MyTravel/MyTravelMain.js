@@ -45,7 +45,7 @@ function MyTravelMain() {
               marginLeft: '4.2vw', 
               height: profileRef.current ? profileRef.current.clientHeight : 'auto' 
               }}>
-              <MyTravelLists setSelectedTravel={setSelectedTravel} setView={setView} 
+              <MyTravelLists setView={setView} 
               isEditMode={isEditMode} setIsEditMode={setIsEditMode}
               view={view} />
             </div>
@@ -74,6 +74,15 @@ function MyTravelMain() {
           </div>
         )}
 
+
+        {/* 상세보기 */}
+        {view === 'specifics' && (
+          <div style={{ flexGrow: 1}}>
+            <MyTravelSpecifics travel={selectedTravel} />
+          </div>
+        )}
+
+
         {/* 찜한 여행 */}
         {view === 'like' && (
           <div style={{ display: 'flex', flexDirection: 'row',justifyContent:'center', height: '62.6vh' }}>
@@ -98,11 +107,6 @@ function MyTravelMain() {
         )}
 
 
-        {view === 'specifics' && (
-          <div style={{ flexGrow: 1}}>
-            <MyTravelSpecifics travel={selectedTravel} />
-          </div>
-        )}
         
         <div style={{ position: 'absolute', left: '2.2vw', bottom: '3.1vh', zIndex: 1000 }}>
           <BtnMyTravelMenu 
