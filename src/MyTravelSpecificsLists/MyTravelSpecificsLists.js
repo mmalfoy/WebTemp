@@ -130,6 +130,7 @@ import MyTravelCreate from '../MyTravelCreate/MyTravelCreate';
                         <TravelCard key={index} {...travel} start={travels.start_date} end={travel.end_date} 
                         handleEditClick={handleEditClick} setSelectedCourse={setSelectedCourse} setIsTravelCreate={setIsTravelCreate}/>
                     )
+                    
                 )}
                 <button className="edit-specific-button" onClick={handleEditClick}></button>
               </div>
