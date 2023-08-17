@@ -1,7 +1,8 @@
 import React,{useState} from 'react';
 import './styles.css';
+import profileTest from './profile.svg';
 
-function MyTravelProfileEdit() {
+function MyTravelProfileEdit({imgSrc,...props}) {
 
     const [showPopup, setShowPopup] = useState(false);
 
@@ -19,14 +20,18 @@ function MyTravelProfileEdit() {
     <div className="profile-edit-container">
         <h1 className="profile-title">내 프로필</h1>
         
-        <div className="profileEdit-image"></div>
 
-        <button className="edit-button" onClick={handleEditButtonClick}></button>
+        <div className='profileEdit-image-container'>
+            <img className = "profileEdit-image" src={profileTest} alt="Profile" />
+            <button className="edit-button" onClick={handleEditButtonClick}></button>
+        </div>
+        
+        
 
         
         <h2 className="profile-subtitle">닉네임</h2>
         
-        <input type="text" className="nickname-input" />
+        <input type="text" className="nickname-input" placeholder="현재 닉네임" />
 
         <div className="buttons-container">
             <button className="save-button">저장하기</button>

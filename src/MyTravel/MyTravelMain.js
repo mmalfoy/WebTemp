@@ -9,6 +9,7 @@ import MyTravelAdd from '../MyTravelAdd/MyTravelAdd';
 import profileTest from './profileTest.png'
 import MyTravelEdit from '../MyTravelEdit/MyTravelEdit'
 import MyTravelProfileEdit from '../MyTravelProfileEdit/MyTravelProfileEdit';
+import Nav from '../Nav/Nav';
 
 
 function MyTravelMain() {
@@ -21,9 +22,9 @@ function MyTravelMain() {
     setView('specifics');
   };
   return (
-    <div>
-      {/* <Nav/> */}
-      <div style={{ display: 'flex', justifyContent:'center'}}>
+    <div className='myTravelMain'>
+      <Nav/> 
+      <div style={{ display: 'flex', justifyContent:'center', }}>
         <button 
           className="edit-done-button" 
           onClick={() => setIsEditMode(false)}
@@ -36,7 +37,7 @@ function MyTravelMain() {
         </button>
 
         {view === 'list' && (
-          <div style={{ display: 'flex', flexDirection: 'row',justifyContent:'center', height: '62.6vh' }}>
+          <div className='my-travel-main-container'>
             <div className='my-travel-profile' ref={profileRef}>
               <MyTravelProfile imgSrc={profileTest} name='라이언' numTravel={8} numLiked={20} date='2023.07.03' />
             </div>
@@ -70,7 +71,7 @@ function MyTravelMain() {
         {/* 프로필 편집 */}
         {view === 'profile' && (
           <div style={{ display: 'flex', flexDirection: 'row',justifyContent:'center', height: '62.6vh' }}>
-            <MyTravelProfileEdit/>
+            <MyTravelProfileEdit imgSrc={'./profile.svg'}/>
           </div>
         )}
 

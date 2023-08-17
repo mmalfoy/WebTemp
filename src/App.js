@@ -1,24 +1,17 @@
-import { BrowserRouter ,Route, Routes} from "react-router-dom";
-import './App.css';
-import React from 'react';
-import { RecoilRoot } from 'recoil';
-import MyTravelMain from './MyTravel/MyTravelMain'; 
-
-
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import MyTravelMain from "./MyTravel/MyTravelMain"
 
 function App() {
-  return (
-    <RecoilRoot>
-      <BrowserRouter>
-        <div className="app">
+    return (
+        <div className="App">
         <Routes>
-            <Route exact path="/mypage" element={<MyTravelMain />}>       
-        </Route>
+            <Route path="/" element={<MyTravelMain />} />
+            <Route path="/mypage" element={<MyTravelMain />} />
+            <Route path="*" element={<Navigate to="/" />} />
         </Routes>
-        </div>
-      </BrowserRouter>
-    </RecoilRoot>
-  );
+    </div>
+    );
 }
 
 export default App;
